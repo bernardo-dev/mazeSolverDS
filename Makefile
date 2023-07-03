@@ -1,8 +1,5 @@
 CC = gcc
 CFLAGS = -std=c99 -Wall
-
-clean:
-	rm -rf *.o
 all: labirinto.o matriz.o posicao.o percurso.o solucaoRecursao.o main.o 
 	$(CC) $(CFLAGS) labirinto.o matriz.o posicao.o percurso.o solucaoRecursao.o main.o -o exe
 	rm -rf *.o
@@ -26,3 +23,6 @@ main.o: main.c
 
 depurar: labirinto.o matriz.o posicao.o percurso.o solucaoRecursao.o main.o
 	$(CC) $(CFLAGS) -g labirinto.o matriz.o posicao.o percurso.o solucaoRecursao.o main.o -o exe
+
+clean:
+	rm -rf *.o

@@ -44,7 +44,7 @@ bool listaInsereNoFinal(Lista *pLista, Posicao posicao){
     return false;
   }
 
-  pNovaCelula->posicao = posicao;
+  pNovaCelula->
 
   pNovaCelula->pProximo = pLista->pCauda;
   pNovaCelula->pAnterior = pLista->pCauda->pAnterior;

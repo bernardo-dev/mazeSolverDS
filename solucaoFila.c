@@ -20,6 +20,8 @@ Percurso *resolverPorBFS(Labirinto *pLabirinto){
   pPercurso->tamanho = 0;
 
   
+
+  
   
   return pPercurso;
 }

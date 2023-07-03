@@ -4,8 +4,8 @@
 #include "item.h"
 #include <stdbool.h>
 
-typedef struct Celula{
-  Item item;
+typedef struct Celula {
+  Posicao posicao;
   struct Celula *pProximo;
   struct Celula *pAnterior;
 } Celula;
@@ -19,19 +19,19 @@ typedef struct {
 // LISTA
 Lista *listaInicia();
 
-void listaLibera(Lista *);
+void listaLibera(Lista **);
 
 bool listaEhVazia(Lista *);
 
 int listaTamanho(Lista *);
 
-bool listaInsereNoInicio(Lista *, void *);
+bool listaInsereNoInicio(Lista *, Posicao);
 
-bool listaInsereNoFinal(Lista *, void *);
+bool listaInsereNoFinal(Lista *, Posicao);
 
-bool listaRemoveDoInicio(Lista *, void *);
+bool listaRemoveDoInicio(Lista *, Posicao *);
 
-bool listaRemoveDoFinal(Lista *, void *);
+bool listaRemoveDoFinal(Lista *, Posicao *);
 
 void listaImprime(Lista *);
 
@@ -44,9 +44,9 @@ bool filaEhVazia(Lista *);
 
 int filaTamanho(Lista *);
 
-bool filaEnfileira(Lista *, void *);
+bool filaEnfileira(Lista *, Posicao);
 
-bool filaDesenfileira(Lista *, void *);
+bool filaDesenfileira(Lista *, Posicao);
 
 void filaImprime(Lista *);
 
@@ -59,9 +59,9 @@ bool pilhaEhVazia(Lista *);
 
 int pilhaTamanho(Lista *);
 
-bool pilhaPush(Lista *, void *);
+bool pilhaPush(Lista *, Posicao);
 
-bool pilhaPop(Lista *, void *);
+bool pilhaPop(Lista *, Posicao);
 
 void pilhaImprime(Lista *);
 

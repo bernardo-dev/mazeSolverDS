@@ -1,60 +1,171 @@
 #include "estruturaDeDados.h"
-#include <stdlib.h>
 #include <stdbool.h>
+#include <stdio.h>
+#include <stdlib.h>
 
 // LISTA
-Lista *listaInicia(){
+Lista *listaInicia() {
   Lista *pLista = (Lista *)malloc(sizeof(Lista));
 
   pLista->pCabeca = (Celula *)malloc(sizeof(Celula));
   pLista->pCauda = (Celula *)malloc(sizeof(Celula));
 
-  
+  pLista->pCabeca->pProximo = pLista->pCauda;
+  pLista->pCabeca->pAnterior = NULL;
+
+  pLista->pCauda->pProximo = NULL;
+  pLista->pCauda->pAnterior = pLista->pCabeca;
+
+  pLista->tamanho = 0;
+
+  return pLista;
 }
 
-void listaLibera(Lista *pLista);
+void listaLibera(Lista **ppLista) {
+  Celula *pAux = (*ppLista)->pCabeca->pProximo;
+  while ((*ppLista)->pCabeca->pProximo != (*ppLista)->pCauda) {
+    (*ppLista)->pCabeca->pProximo = (*ppLista)->pCauda->pProximo->pProximo;
+    free(pAux);
+    pAux = (*ppLista)->pCabeca->pProximo;
+  }
+  free((*ppLista)->pCabeca);
+  free((*ppLista)->pCauda);
+  free((*ppLista));
+  *ppLista = NULL;
+}
 
-bool listaEhVazia(Lista *pLista);
+bool listaEhVazia(Lista *pLista) {
+  return (pLista->pCabeca->pProximo == pLista->pCauda);
+}
 
-int listaTamanho(Lista *pLista);
+int listaTamanho(Lista *pLista) { return pLista->tamanho; }
 
-bool listaInsereNoInicio(Lista *pLista, void *pItem);
+bool listaInsereNoInicio(Lista *pLista, Posicao posicao) {
+  Celula *pNovaCelula = NULL;
+  pNovaCelula = (Celula *)malloc(sizeof(Celula));
 
-bool listaInsereNoFinal(Lista *pLista, void *pItem);
+  if (pNovaCelula == NULL) {
+    return false;
+  }
 
-bool listaRemoveDoInicio(Lista *pLista, void *pItem);
+  pNovaCelula->posicao = posicao;
 
-bool listaRemoveDoFinal(Lista *pLista, void *pItem);
+  pNovaCelula->pProximo = pLista->pCabeca->pProximo;
+  pNovaCelula->pAnterior = pLista->pCabeca->pProximo->pAnterior;
 
-void listaImprime(Lista *pLista);
+  pLista->pCabeca->pProximo->pAnterior = pNovaCelula;
+  pLista->pCabeca->pProximo = pNovaCelula;
+
+  pLista->tamanho++;
+
+  return true;
+}
+
+bool listaInsereNoFinal(Lista *pLista, Posicao posicao) {
+  Celula *pNovaCelula = NULL;
+  pNovaCelula = (Celula *)malloc(sizeof(Celula));
+
+  if (pNovaCelula == NULL) {
+    return false;
+  }
+
+  pNovaCelula->posicao = posicao;
+
+  pNovaCelula->pProximo = pLista->pCauda;
+  pNovaCelula->pAnterior = pLista->pCauda->pAnterior;
+
+  pLista->pCauda->pAnterior->pProximo = pNovaCelula;
+  pLista->pCauda->pAnterior = pNovaCelula;
+
+  pLista->tamanho++;
+
+  return true;
+}
+
+bool listaRemoveDoInicio(Lista *pLista, Posicao *pPosicao) {
+  if (listaEhVazia(pLista)) {
+    return false;
+  }
+
+  Celula *pAux = (Celula *)malloc(sizeof(Celula));
+
+  if (pAux == NULL) {
+    return false;
+  }
+
+  pAux = pLista->pCabeca->pProximo;
+
+  *pPosicao = pAux->posicao;
+
+  pAux->pProximo->pAnterior = pLista->pCabeca;
+  pLista->pCabeca->pProximo = pAux->pProximo;
+
+  free(pAux);
+
+  return true;
+}
+
+bool listaRemoveDoFinal(Lista *pLista, Posicao *pPosicao) {
+  if (listaEhVazia(pLista)) {
+    return false;
+  }
+
+  Celula *pAux = (Celula *)malloc(sizeof(Celula));
+
+  if (pAux == NULL) {
+    return false;
+  }
+
+  pAux = pLista->pCauda->pAnterior;
+
+  *pPosicao = pAux->posicao;
+
+  pAux->pAnterior->pProximo = pLista->pCauda;
+  pLista->pCauda->pAnterior = pAux->pAnterior;
+
+  free(pAux);
+
+  return true;
+}
+
+void listaImprime(Lista *pLista) {
+  Celula *pCelulaAtual = pLista->pCabeca;
+
+  for (int i = 0; i < pLista->tamanho; i++) {
+    pCelulaAtual = pCelulaAtual->pProximo;
+    printf("(%d, %d)\n", pCelulaAtual->posicao.linha,
+           pCelulaAtual->posicao.coluna);
+  }
+
+  pCelulaAtual = NULL;
+}
 
 // FILA
-Fila *filaInicia();
+Lista *filaInicia();
 
-void filaLibera(Fila *pFila);
+void filaLibera(Lista *pLista);
 
-bool filaEhVazia(Fila *pFila);
+bool filaEhVazia(Lista *pLista);
 
-int filaTamanho(Fila *pFila);
+int filaTamanho(Lista *pLista);
 
-bool filaEnfileira(Fila *pFila, void *pItem);
+bool filaEnfileira(Lista *pLista, Posicao posicao);
 
-bool filaDesenfileira(Fila *pFila, void *pItem);
+bool filaDesenfileira(Lista *pLista, Posicao posicao);
 
-void filaImprime(Fila *pFila);
+void filaImprime(Lista *pLista);
 
 // PILHA
-Pilha *pilhaInicia();
+Lista *pilhaInicia();
 
-void pilhaLibera(Pilha *pPilha);
+void pilhaLibera(Lista *pLista);
 
-bool pilhaEhVazia(Pilha *pPilha);
+bool pilhaEhVazia(Lista *pLista);
 
-int pilhaTamanho(Pilha *pPilha);
+int pilhaTamanho(Lista *pLista);
 
-bool pilhaPush(Pilha *pPilha, void *pItem);
+bool pilhaPush(Lista *pLista, Posicao posicao);
 
-bool pilhaPop(Pilha *pPilha, void *pItem);
+bool pilhaPop(Lista *pLista, Posicao posicao);
 
-void pilhaImprime(Pilha *pPilha);
-
+void pilhaImprime(Lista *pLista);
