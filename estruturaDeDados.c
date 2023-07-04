@@ -141,19 +141,33 @@ void listaImprime(Lista *pLista) {
 }
 
 // FILA
-Lista *filaInicia();
+Lista *filaInicia(){
+  return listaInicia();
+}
 
-void filaLibera(Lista *pLista);
+void filaLibera(Lista **ppLista){
+  listaLibera(ppLista);
+}
 
-bool filaEhVazia(Lista *pLista);
+bool filaEhVazia(Lista *pLista){
+  return listaEhVazia(pLista);
+}
 
-int filaTamanho(Lista *pLista);
+int filaTamanho(Lista *pLista){
+  return listaTamanho(pLista);
+}
 
-bool filaEnfileira(Lista *pLista, Posicao posicao);
+bool filaEnfileira(Lista *pLista, Posicao posicao){
+  return listaInsereNoFinal(pLista, posicao);
+}
 
-bool filaDesenfileira(Lista *pLista, Posicao posicao);
+bool filaDesenfileira(Lista *pLista, Posicao *pPosicao){
+  return listaRemoveDoInicio(pLista, pPosicao);
+}
 
-void filaImprime(Lista *pLista);
+void filaImprime(Lista *pLista){
+  listaImprime(pLista);
+}
 
 // PILHA
 Lista *pilhaInicia();

@@ -1,7 +1,7 @@
 #ifndef ESTRUTURADEDADOS_H
 #define ESTRUTURADEDADOS_H
 
-#include "item.h"
+#include "posicao.h"
 #include <stdbool.h>
 
 typedef struct Celula {
@@ -38,7 +38,7 @@ void listaImprime(Lista *);
 // FILA
 Lista *filaInicia();
 
-void filaLibera(Lista *);
+void filaLibera(Lista **);
 
 bool filaEhVazia(Lista *);
 
@@ -46,7 +46,7 @@ int filaTamanho(Lista *);
 
 bool filaEnfileira(Lista *, Posicao);
 
-bool filaDesenfileira(Lista *, Posicao);
+bool filaDesenfileira(Lista *, Posicao *);
 
 void filaImprime(Lista *);
 
