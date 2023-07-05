@@ -170,13 +170,19 @@ void filaImprime(Lista *pLista){
 }
 
 // PILHA
-Lista *pilhaInicia();
+Lista *pilhaInicia(){
+  return listaInicia();
+}
 
 void pilhaLibera(Lista *pLista);
 
-bool pilhaEhVazia(Lista *pLista);
+bool pilhaEhVazia(Lista *pLista){
+  return listaEhVazia(pLista);
+}
 
-int pilhaTamanho(Lista *pLista);
+int pilhaTamanho(Lista *pLista){
+  return listaTamanho(pLista);
+}
 
 bool pilhaPush(Lista *pLista, Posicao posicao);
 
