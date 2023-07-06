@@ -127,6 +127,8 @@ bool listaRemoveDoFinal(Lista *pLista, Posicao *pPosicao) {
 
   free(pAux);
 
+  pLista->tamanho--;
+
   return true;
 }
 
