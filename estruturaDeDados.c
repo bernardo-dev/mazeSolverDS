@@ -102,8 +102,6 @@ bool listaRemoveDoInicio(Lista *pLista, Posicao *pPosicao) {
 
   free(pAux);
 
-  pLista->tamanho--;
-
   return true;
 }
 
@@ -126,9 +124,7 @@ bool listaRemoveDoFinal(Lista *pLista, Posicao *pPosicao) {
   pLista->pCauda->pAnterior = pAux->pAnterior;
 
   free(pAux);
-
-  pLista->tamanho--;
-
+  
   return true;
 }
 
@@ -174,30 +170,16 @@ void filaImprime(Lista *pLista){
 }
 
 // PILHA
-Lista *pilhaInicia(){
-  return listaInicia();
-}
+Lista *pilhaInicia();
 
-void pilhaLibera(Lista **ppLista){
-  return listaLibera(ppLista);
-}
+void pilhaLibera(Lista **ppLista);
 
-bool pilhaEhVazia(Lista *pLista){
-  return listaEhVazia(pLista);
-}
+bool pilhaEhVazia(Lista *pLista);
 
-int pilhaTamanho(Lista *pLista){
-  return listaTamanho(pLista);
-}
+int pilhaTamanho(Lista *pLista);
 
-bool pilhaPush(Lista *pLista, Posicao posicao){
-  return listaInsereNoInicio(pLista, posicao);
-}
+bool pilhaPush(Lista *pLista, Posicao posicao);
 
-bool pilhaPop(Lista *pLista, Posicao *pPosicao){
-  return listaRemoveDoInicio(pLista, pPosicao);
-}
+bool pilhaPop(Lista *pLista, Posicao *pPosicao);
 
-void pilhaImprime(Lista *pLista){
-  listaImprime(pLista);
-}
+void pilhaImprime(Lista *pLista);
