@@ -1,8 +1,8 @@
 CC = gcc
 CFLAGS = -std=c99 -Wall
 
-all: labirinto.o matriz.o posicao.o percurso.o estruturaDeDados.o solucaoRecursao.o solucaoFila.o main.o 
-	$(CC) $(CFLAGS) labirinto.o matriz.o posicao.o percurso.o estruturaDeDados.o solucaoRecursao.o solucaoFila.o main.o -o exe
+all: labirinto.o matriz.o posicao.o percurso.o estruturaDeDados.o solucaoRecursao.o solucaoFila.o solucaoPilha.o main.o 
+	$(CC) $(CFLAGS) labirinto.o matriz.o posicao.o percurso.o estruturaDeDados.o solucaoRecursao.o solucaoFila.o solucaoPilha.o main.o -o exe
 	rm -rf *.o
 
 labirinto.o: labirinto.c labirinto.h
@@ -26,9 +26,12 @@ solucaoRecursao.o: solucaoRecursao.c solucaoRecursao.h
 solucaoFila.o: solucaoFila.c solucaoFila.h
 	$(CC) $(CFLAGS) -c solucaoFila.c
 
+solucaoPilha.o: solucaoPilha.c solucaoPilha.h
+	$(CC) $(CFLAGS) -c solucaoPilha.c
+
 main.o: main.c
 	$(CC) $(CFLAGS) -c main.c
 
-depurar: labirinto.o matriz.o posicao.o percurso.o estruturaDeDados.o solucaoRecursao.o solucaoFila.o main.o
-	$(CC) $(CFLAGS) -g labirinto.o matriz.o posicao.o percurso.o estruturaDeDados.o solucaoRecursao.o solucaoFila.o main.o -o exe
+depurar: labirinto.o matriz.o posicao.o percurso.o estruturaDeDados.o solucaoRecursao.o solucaoFila.o solucaoPilha.o main.o
+	$(CC) $(CFLAGS) -g labirinto.o matriz.o posicao.o percurso.o estruturaDeDados.o solucaoRecursao.o solucaoFila.o solucaoPilha.o main.o -o exe
 	rm -rf *.o

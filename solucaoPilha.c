@@ -7,9 +7,9 @@
 #include "percurso.h"
 #include <stdio.h>
 
-bool estaLivre(Labirinto *pLabirinto, char **pVisitados, int linha, int coluna) {
+bool estaValido(Labirinto *pLabirinto, char **pVisitados, int linha, int coluna) {
 
-  // Verifica se a posicao está dentro dos limtes do labirinto
+  // Verifica se a posicao está dentro dos limites do labirinto
   if (linha < 0 || linha >= pLabirinto->linhas)
     return false;
   if (coluna < 0 || coluna >= pLabirinto->colunas)
@@ -73,7 +73,7 @@ Percurso *resolverPorDFS(Labirinto *pLabirinto) {
     }
 
     // DIREITA
-    if (estaLivre(pLabirinto, pVisitados, linha, coluna + 1)) {
+    if (estaValido(pLabirinto, pVisitados, linha, coluna + 1)) {
       proximaPosicao.linha = linha;
       proximaPosicao.coluna = coluna + 1;
 
@@ -81,7 +81,7 @@ Percurso *resolverPorDFS(Labirinto *pLabirinto) {
     }
 
     // BAIXO
-    if (estaLivre(pLabirinto, pVisitados, linha + 1, coluna)) {
+    if (estaValido(pLabirinto, pVisitados, linha + 1, coluna)) {
       proximaPosicao.linha = linha + 1;
       proximaPosicao.coluna = coluna;
 
@@ -89,7 +89,7 @@ Percurso *resolverPorDFS(Labirinto *pLabirinto) {
     }
 
     // ESQUERDA
-    if (estaLivre(pLabirinto, pVisitados, linha, coluna - 1)) {
+    if (estaValido(pLabirinto, pVisitados, linha, coluna - 1)) {
       proximaPosicao.linha = linha;
       proximaPosicao.coluna = coluna - 1;
 
@@ -97,7 +97,7 @@ Percurso *resolverPorDFS(Labirinto *pLabirinto) {
     }
 
     // CIMA
-    if (estaLivre(pLabirinto, pVisitados, linha - 1, coluna)) {
+    if (estaValido(pLabirinto, pVisitados, linha - 1, coluna)) {
       proximaPosicao.linha = linha - 1;
       proximaPosicao.coluna = coluna;
 
