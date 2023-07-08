@@ -124,7 +124,7 @@ bool listaRemoveDoFinal(Lista *pLista, Posicao *pPosicao) {
   pLista->pCauda->pAnterior = pAux->pAnterior;
 
   free(pAux);
-
+  
   return true;
 }
 
@@ -172,7 +172,7 @@ void filaImprime(Lista *pLista){
 // PILHA
 Lista *pilhaInicia();
 
-void pilhaLibera(Lista *pLista);
+void pilhaLibera(Lista **ppLista);
 
 bool pilhaEhVazia(Lista *pLista);
 
@@ -180,6 +180,6 @@ int pilhaTamanho(Lista *pLista);
 
 bool pilhaPush(Lista *pLista, Posicao posicao);
 
-bool pilhaPop(Lista *pLista, Posicao posicao);
+bool pilhaPop(Lista *pLista, Posicao *pPosicao);
 
 void pilhaImprime(Lista *pLista);
