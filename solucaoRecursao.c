@@ -46,11 +46,11 @@ void resolverLabirinto(Labirinto *pLabirinto, char **pVisitados, int linha,
 
   // Verifica se é uma parede ou um ponto já visitado
   if (pLabirinto->pMatriz[linha][coluna] == '*' ||
-      pVisitados[linha][coluna] == '.') {
+      pVisitados[linha][coluna] == 'o') {
     return;
   }
 
-  pVisitados[linha][coluna] = '.';
+  pVisitados[linha][coluna] = 'o';
   pPercurso2->pPosicoes[pPercurso2->tamanho].linha = linha;
   pPercurso2->pPosicoes[pPercurso2->tamanho].coluna = coluna;
   pPercurso2->tamanho++;
