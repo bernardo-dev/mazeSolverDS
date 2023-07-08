@@ -29,8 +29,23 @@ Percurso *resolverPorRecursao(Labirinto *pLabirinto) {
   resolverLabirinto(pLabirinto, pVisitados, pLabirinto->comecoLinha,
                     pLabirinto->comecoColuna, pPercurso1, pPercurso2);
 
+  // Se o labirinto nao tiver solucao entao retorna um percurso com as coordenadas dos caminhos visitados
+  if (pPercurso1->tamanho == UINT_MAX){
+    pPercurso1->tamanho = 0;
+    for (int i = 0; i < pLabirinto->linhas; i++){
+      for (int j = 0; j < pLabirinto->colunas; j++){
+        if (pVisitados[i][j] == 'o'){
+          pPercurso1->pPosicoes[pPercurso1->tamanho].linha = i;
+          pPercurso1->pPosicoes[pPercurso1->tamanho].coluna = j;
+          pPercurso1->tamanho++;
+        }
+      }
+    }
+  }
+
   desalocarMatriz(pVisitados, pLabirinto->linhas);
   desalocaPercurso(&pPercurso2);
+
   return pPercurso1;
 }
 
@@ -82,6 +97,7 @@ void resolverLabirinto(Labirinto *pLabirinto, char **pVisitados, int linha,
   resolverLabirinto(pLabirinto, pVisitados, linha - 1, coluna, pPercurso1,
                     pPercurso2);
 
-  pVisitados[linha][coluna] = ' ';
+  // Removido para nao apagar os caminhos visitados achando uma saida ou nao
+  // pVisitados[linha][coluna] = ' ';
   pPercurso2->tamanho--;
 }

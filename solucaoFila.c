@@ -71,6 +71,8 @@ Percurso *resolverPorBFS(Labirinto *pLabirinto) {
       //   printf("%d %d\n", pPercurso->pPosicoes[i].linha,
       //          pPercurso->pPosicoes[i].coluna);
       // }
+      // desalocarMatriz(pVisitados, pLabirinto->linhas);
+      // filaLibera(&pFila);
       return pPercurso;
     }
 
@@ -106,6 +108,9 @@ Percurso *resolverPorBFS(Labirinto *pLabirinto) {
       filaEnfileira(pFila, proximaPosicao);
     }
   }
+
+  desalocarMatriz(pVisitados, pLabirinto->linhas);
+  filaLibera(&pFila);
 
   return pPercurso;
 }
