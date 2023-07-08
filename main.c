@@ -1,6 +1,8 @@
-#include "percurso.h"
 #include "labirinto.h"
+#include "percurso.h"
+#include "solucaoFila.h"
 #include "solucaoRecursao.h"
+#include "solucaoPilha.h"
 #include <limits.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -28,23 +30,28 @@ int main(int argc, char *argv[]) {
 
   leLabirinto(pLabirinto);
 
-  Percurso *pPercurso = resolverPorRecursao(pLabirinto);
+  Percurso *pPercurso = NULL;
 
-  if (pPercurso->tamanho != UINT_MAX) {
-    if (opcao == 'p') {
-      printf("%d\n", pPercurso->tamanho - 1);
+  if (opcao == 'r') {
+    pPercurso = resolverPorRecursao(pLabirinto);
 
-      imprimePercursoNoLabirinto(pLabirinto, pPercurso);
-    } else if (opcao == 'c') {
-      printf("%d\n", pPercurso->tamanho - 1);
+    printf("%d\n", pPercurso->tamanho - 1);
 
-      for (int i = 1; i < pPercurso->tamanho; i++) {
-        printf("%d, %d\n", pPercurso->pPosicoes[i].linha,
-               pPercurso->pPosicoes[i].coluna);
-      }
-    }
-  } else {
-    printf("EPIC FAIL!\n");
+    imprimePercursoNoLabirinto(pLabirinto, pPercurso);
+  } else if (opcao == 'f') {
+
+    pPercurso = resolverPorBFS(pLabirinto);
+
+    printf("%d\n", pPercurso->tamanho - 1);
+
+    imprimePercursoNoLabirinto(pLabirinto, pPercurso);
+  } else if (opcao == 'p'){
+    
+    pPercurso = resolverPorDFS(pLabirinto);
+
+    printf("%d\n", pPercurso->tamanho - 1);
+
+    imprimePercursoNoLabirinto(pLabirinto, pPercurso);
   }
 
   desalocaPercurso(&pPercurso);
@@ -53,13 +60,13 @@ int main(int argc, char *argv[]) {
   // Marca o fim do tempo para execucao do programa
   fim = clock();
 
-  tempoDecorrido = (double) (fim - inicio) / CLOCKS_PER_SEC;
+  tempoDecorrido = (double)(fim - inicio) / CLOCKS_PER_SEC;
 
-  if (argc > 1){
-    if (strcmp(argv[1], "tempo") == 0){
+  if (argc > 1) {
+    if (strcmp(argv[1], "tempo") == 0) {
       printf("Tempo de execução: %.6f segundos\n", tempoDecorrido);
     }
   }
-  
+
   return 0;
 }

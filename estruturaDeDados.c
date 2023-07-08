@@ -102,8 +102,6 @@ bool listaRemoveDoInicio(Lista *pLista, Posicao *pPosicao) {
 
   free(pAux);
 
-  pLista->tamanho--;
-
   return true;
 }
 
@@ -126,9 +124,7 @@ bool listaRemoveDoFinal(Lista *pLista, Posicao *pPosicao) {
   pLista->pCauda->pAnterior = pAux->pAnterior;
 
   free(pAux);
-
-  pLista->tamanho--;
-
+  
   return true;
 }
 

@@ -65,7 +65,7 @@ void imprimePercursoNoLabirinto(Labirinto *pLabirinto, Percurso *pPercurso) {
       for (int k = 1; k < pPercurso->tamanho; k++) {
         if (i == pPercurso->pPosicoes[k].linha &&
             j == pPercurso->pPosicoes[k].coluna) {
-          printf(".");
+          printf("o");
           impresso = 1;
           // k++;
         }

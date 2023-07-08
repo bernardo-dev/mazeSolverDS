@@ -2,7 +2,6 @@
 #define SOLUCAOPILHA_H
 
 #include "labirinto.h"
-#include "estruturaDeDados.h"
 #include "matriz.h"
 #include "percurso.h"
 
