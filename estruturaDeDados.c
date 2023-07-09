@@ -114,21 +114,12 @@ bool listaRemoveDoInicio(Lista *pLista, Posicao *pPosicao) {
     return false;
   }
 
-  Celula *pAux = (Celula *)malloc(sizeof(Celula));
-
-  if (pAux == NULL) {
-    return false;
-  }
-
-  pAux = pLista->pCabeca->pProximo;
+  Celula *pAux = pLista->pCabeca->pProximo;
 
   *pPosicao = pAux->posicao;
 
-  /*pAux->pProximo->pAnterior = pLista->pCabeca;
-  pLista->pCabeca->pProximo = pAux->pProximo;*/
-
-  pLista->pCabeca->pProximo = pAux->pProximo;
   pAux->pProximo->pAnterior = pLista->pCabeca;
+  pLista->pCabeca->pProximo = pAux->pProximo;
 
   free(pAux);
 

@@ -107,7 +107,6 @@ Percurso *resolverPorDFS(Labirinto *pLabirinto) {
 
   //liberaçoes de memoria
   pilhaLibera(&pPilha);
-  pilhaLibera(&pLabirinto->pPilha);
   desalocarMatriz(pVisitados, pLabirinto->linhas);  
 
   return pPercurso;
