@@ -53,7 +53,7 @@ void filaImprime(Lista *);
 // PILHA
 Lista *pilhaInicia();
 
-void pilhaLibera(Lista *);
+void pilhaLibera(Lista **);
 
 bool pilhaEhVazia(Lista *);
 
@@ -61,7 +61,7 @@ int pilhaTamanho(Lista *);
 
 bool pilhaPush(Lista *, Posicao);
 
-bool pilhaPop(Lista *, Posicao);
+bool pilhaPop(Lista *, Posicao *);
 
 void pilhaImprime(Lista *);
 
