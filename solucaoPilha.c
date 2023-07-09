@@ -27,7 +27,7 @@ bool estaValido(Labirinto *pLabirinto, char **pVisitados, int linha,
 
 Percurso *resolverPorDFS(Labirinto *pLabirinto) {
   // Inicializa uma matriz do tamanho do labirinto,
-  // sendo todas as posicoes nao vistadas
+  // sendo todas as posicoes nao visitadas
   char **pVisitados = alocarMatriz(pLabirinto->linhas, pLabirinto->colunas);
 
   for (int i = 0; i < pLabirinto->linhas; i++) {
