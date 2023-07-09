@@ -7,7 +7,8 @@
 #include "posicao.h"
 #include <stdio.h>
 
-bool estaLivre(Labirinto *pLabirinto, char **pVisitados, int linha, int coluna) {
+bool estaLivre(Labirinto *pLabirinto, char **pVisitados, int linha,
+               int coluna) {
 
   // Verifica se a posicao está dentro dos limtes do labirinto
   if (linha < 0 || linha >= pLabirinto->linhas)
@@ -71,6 +72,9 @@ Percurso *resolverPorBFS(Labirinto *pLabirinto) {
       //   printf("%d %d\n", pPercurso->pPosicoes[i].linha,
       //          pPercurso->pPosicoes[i].coluna);
       // }
+
+      // desalocarMatriz(pVisitados, pLabirinto->linhas);
+      // filaLibera(&pFila);
       return pPercurso;
     }
 
@@ -106,6 +110,9 @@ Percurso *resolverPorBFS(Labirinto *pLabirinto) {
       filaEnfileira(pFila, proximaPosicao);
     }
   }
+
+  // desalocarMatriz(pVisitados, pLabirinto->linhas);
+  // filaLibera(&pFila);
 
   return pPercurso;
 }

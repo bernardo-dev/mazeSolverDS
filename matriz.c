@@ -5,7 +5,7 @@ char **alocarMatriz(int linhas, int colunas) {
   char **pMatriz = (char **)malloc(sizeof(char *) * linhas);
 
   for (int i = 0; i < linhas; i++) {
-    pMatriz[i] = calloc(colunas, sizeof(char));
+    pMatriz[i] = (char*)malloc(colunas * sizeof(char));
   }
 
   return pMatriz;

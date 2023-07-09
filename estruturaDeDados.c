@@ -5,6 +5,32 @@
 
 // LISTA
 Lista *listaInicia() {
+  /*Lista *pLista = malloc(sizeof(Lista));
+    if (pLista == NULL) {
+        return NULL;
+    }
+
+    pLista->pCabeca = malloc(sizeof(Celula));
+    if (pLista->pCabeca == NULL) {
+        free(pLista);
+        return NULL;
+    }
+
+    pLista->pCauda = malloc(sizeof(Celula));
+    if (pLista->pCauda == NULL) {
+        free(pLista->pCabeca);
+        free(pLista);
+        return NULL;
+    }
+
+    pLista->pCabeca->pProximo = pLista->pCauda;
+    pLista->pCabeca->pAnterior = NULL;
+    pLista->pCauda->pProximo = NULL;
+    pLista->pCauda->pAnterior = pLista->pCabeca;
+    pLista->tamanho = 0;
+
+    return pLista;*/
+
   Lista *pLista = (Lista *)malloc(sizeof(Lista));
 
   pLista->pCabeca = (Celula *)malloc(sizeof(Celula));
@@ -23,8 +49,9 @@ Lista *listaInicia() {
 
 void listaLibera(Lista **ppLista) {
   Celula *pAux = (*ppLista)->pCabeca->pProximo;
+
   while ((*ppLista)->pCabeca->pProximo != (*ppLista)->pCauda) {
-    (*ppLista)->pCabeca->pProximo = (*ppLista)->pCauda->pProximo->pProximo;
+    (*ppLista)->pCabeca->pProximo = (*ppLista)->pCabeca->pProximo->pProximo;
     free(pAux);
     pAux = (*ppLista)->pCabeca->pProximo;
   }
@@ -97,10 +124,15 @@ bool listaRemoveDoInicio(Lista *pLista, Posicao *pPosicao) {
 
   *pPosicao = pAux->posicao;
 
-  pAux->pProximo->pAnterior = pLista->pCabeca;
+  /*pAux->pProximo->pAnterior = pLista->pCabeca;
+  pLista->pCabeca->pProximo = pAux->pProximo;*/
+
   pLista->pCabeca->pProximo = pAux->pProximo;
+  pAux->pProximo->pAnterior = pLista->pCabeca;
 
   free(pAux);
+
+  pLista->tamanho--;
 
   return true;
 }
@@ -171,7 +203,11 @@ void filaImprime(Lista *pLista){
 
 // PILHA
 Lista *pilhaInicia(){
-  return listaInicia();
+  Lista *pPilha = listaInicia();
+  if(pPilha == NULL){
+    return NULL;
+  }
+  return pPilha;
 }
 
 void pilhaLibera(Lista **ppLista){

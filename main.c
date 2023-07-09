@@ -1,8 +1,8 @@
 #include "labirinto.h"
 #include "percurso.h"
 #include "solucaoFila.h"
-#include "solucaoRecursao.h"
 #include "solucaoPilha.h"
+#include "solucaoRecursao.h"
 #include <limits.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -45,8 +45,8 @@ int main(int argc, char *argv[]) {
     printf("%d\n", pPercurso->tamanho - 1);
 
     imprimePercursoNoLabirinto(pLabirinto, pPercurso);
-  } else if (opcao == 'p'){
-    
+  } else if (opcao == 'p') {
+
     pPercurso = resolverPorDFS(pLabirinto);
 
     printf("%d\n", pPercurso->tamanho - 1);
