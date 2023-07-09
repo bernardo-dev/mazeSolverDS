@@ -1,13 +1,14 @@
 #include "solucaoPilha.h"
 #include "estruturaDeDados.h"
 #include "labirinto.h"
-#include "posicao.h"
 #include "limits.h"
 #include "matriz.h"
 #include "percurso.h"
+#include "posicao.h"
 #include <stdio.h>
 
-bool estaValido(Labirinto *pLabirinto, char **pVisitados, int linha, int coluna) {
+bool estaValido(Labirinto *pLabirinto, char **pVisitados, int linha,
+                int coluna) {
 
   // Verifica se a posicao está dentro dos limites do labirinto
   if (linha < 0 || linha >= pLabirinto->linhas)
@@ -53,8 +54,8 @@ Percurso *resolverPorDFS(Labirinto *pLabirinto) {
   Posicao proximaPosicao;
   int linha, coluna;
 
-  while(!pilhaEhVazia(pPilha)){
-    pilhaPop(pPilha, &posicaoAtual); //Desempilha a posiçao atual
+  while (!pilhaEhVazia(pPilha)) {
+    pilhaPop(pPilha, &posicaoAtual); // Desempilha a posiçao atual
 
     linha = posicaoAtual.linha;
     coluna = posicaoAtual.coluna;
@@ -68,8 +69,9 @@ Percurso *resolverPorDFS(Labirinto *pLabirinto) {
     // Verifica se a posição atual é a saída do labirinto
     if (posicaoAtual.linha == pLabirinto->saidaLinha &&
         posicaoAtual.coluna == pLabirinto->saidaColuna) {
-
-        return pPercurso;
+      desalocarMatriz(pVisitados, pLabirinto->linhas);
+      pilhaLibera(&pPilha);
+      return pPercurso;
     }
 
     // DIREITA
@@ -105,5 +107,8 @@ Percurso *resolverPorDFS(Labirinto *pLabirinto) {
     }
   }
 
+  desalocarMatriz(pVisitados, pLabirinto->linhas);
+  pilhaLibera(&pPilha);
+
   return pPercurso;
-}  
+}

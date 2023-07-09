@@ -22,15 +22,18 @@ Lista *listaInicia() {
 }
 
 void listaLibera(Lista **ppLista) {
-  Celula *pAux = (*ppLista)->pCabeca->pProximo;
-  while ((*ppLista)->pCabeca->pProximo != (*ppLista)->pCauda) {
-    (*ppLista)->pCabeca->pProximo = (*ppLista)->pCauda->pProximo->pProximo;
-    free(pAux);
-    pAux = (*ppLista)->pCabeca->pProximo;
+  if (!listaEhVazia(*ppLista)) {
+    Posicao posicao;
+
+    while (!listaEhVazia(*ppLista)) {
+      listaRemoveDoInicio(*ppLista, &posicao);
+    }
   }
+
   free((*ppLista)->pCabeca);
   free((*ppLista)->pCauda);
   free((*ppLista));
+
   *ppLista = NULL;
 }
 
@@ -62,8 +65,7 @@ bool listaInsereNoInicio(Lista *pLista, Posicao posicao) {
 }
 
 bool listaInsereNoFinal(Lista *pLista, Posicao posicao) {
-  Celula *pNovaCelula = NULL;
-  pNovaCelula = (Celula *)malloc(sizeof(Celula));
+  Celula *pNovaCelula = (Celula *)malloc(sizeof(Celula));
 
   if (pNovaCelula == NULL) {
     return false;
@@ -87,11 +89,7 @@ bool listaRemoveDoInicio(Lista *pLista, Posicao *pPosicao) {
     return false;
   }
 
-  Celula *pAux = (Celula *)malloc(sizeof(Celula));
-
-  if (pAux == NULL) {
-    return false;
-  }
+  Celula *pAux;
 
   pAux = pLista->pCabeca->pProximo;
 
@@ -102,6 +100,8 @@ bool listaRemoveDoInicio(Lista *pLista, Posicao *pPosicao) {
 
   free(pAux);
 
+  pLista->tamanho--;
+
   return true;
 }
 
@@ -110,11 +110,7 @@ bool listaRemoveDoFinal(Lista *pLista, Posicao *pPosicao) {
     return false;
   }
 
-  Celula *pAux = (Celula *)malloc(sizeof(Celula));
-
-  if (pAux == NULL) {
-    return false;
-  }
+  Celula *pAux;
 
   pAux = pLista->pCauda->pAnterior;
 
@@ -124,7 +120,9 @@ bool listaRemoveDoFinal(Lista *pLista, Posicao *pPosicao) {
   pLista->pCauda->pAnterior = pAux->pAnterior;
 
   free(pAux);
-  
+
+  pLista->tamanho--;
+
   return true;
 }
 
@@ -141,59 +139,39 @@ void listaImprime(Lista *pLista) {
 }
 
 // FILA
-Lista *filaInicia(){
-  return listaInicia();
-}
+Lista *filaInicia() { return listaInicia(); }
 
-void filaLibera(Lista **ppLista){
-  listaLibera(ppLista);
-}
+void filaLibera(Lista **ppLista) { listaLibera(ppLista); }
 
-bool filaEhVazia(Lista *pLista){
-  return listaEhVazia(pLista);
-}
+bool filaEhVazia(Lista *pLista) { return listaEhVazia(pLista); }
 
-int filaTamanho(Lista *pLista){
-  return listaTamanho(pLista);
-}
+int filaTamanho(Lista *pLista) { return listaTamanho(pLista); }
 
-bool filaEnfileira(Lista *pLista, Posicao posicao){
+bool filaEnfileira(Lista *pLista, Posicao posicao) {
   return listaInsereNoFinal(pLista, posicao);
 }
 
-bool filaDesenfileira(Lista *pLista, Posicao *pPosicao){
+bool filaDesenfileira(Lista *pLista, Posicao *pPosicao) {
   return listaRemoveDoInicio(pLista, pPosicao);
 }
 
-void filaImprime(Lista *pLista){
-  listaImprime(pLista);
-}
+void filaImprime(Lista *pLista) { listaImprime(pLista); }
 
 // PILHA
-Lista *pilhaInicia(){
-  return listaInicia();
-}
+Lista *pilhaInicia() { return listaInicia(); }
 
-void pilhaLibera(Lista **ppLista){
-  return listaLibera(ppLista);
-}
+void pilhaLibera(Lista **ppLista) { return listaLibera(ppLista); }
 
-bool pilhaEhVazia(Lista *pLista){
-  return listaEhVazia(pLista);
-}
+bool pilhaEhVazia(Lista *pLista) { return listaEhVazia(pLista); }
 
-int pilhaTamanho(Lista *pLista){
-  return listaTamanho(pLista);
-}
+int pilhaTamanho(Lista *pLista) { return listaTamanho(pLista); }
 
-bool pilhaPush(Lista *pLista, Posicao posicao){
+bool pilhaPush(Lista *pLista, Posicao posicao) {
   return listaInsereNoInicio(pLista, posicao);
 }
 
-bool pilhaPop(Lista *pLista, Posicao *pPosicao){
+bool pilhaPop(Lista *pLista, Posicao *pPosicao) {
   return listaRemoveDoInicio(pLista, pPosicao);
 }
 
-void pilhaImprime(Lista *pLista){
-  listaImprime(pLista);
-}
+void pilhaImprime(Lista *pLista) { listaImprime(pLista); }

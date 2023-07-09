@@ -49,8 +49,7 @@ Percurso *resolverPorBFS(Labirinto *pLabirinto) {
 
   Posicao posicaoAtual;
   Posicao proximaPosicao;
-  int linha;
-  int coluna;
+  int linha, coluna;
 
   while (!filaEhVazia(pFila)) {
     filaDesenfileira(pFila, &posicaoAtual);
@@ -65,16 +64,10 @@ Percurso *resolverPorBFS(Labirinto *pLabirinto) {
     pPercurso->tamanho++;
 
     // Verifica se chegou na saida
-    if (posicaoAtual.linha == pLabirinto->saidaLinha &&
-        posicaoAtual.coluna == pLabirinto->saidaColuna) {
-
-      // for (int i = 0; i < pPercurso->tamanho; i++) {
-      //   printf("%d %d\n", pPercurso->pPosicoes[i].linha,
-      //          pPercurso->pPosicoes[i].coluna);
-      // }
-
-      // desalocarMatriz(pVisitados, pLabirinto->linhas);
-      // filaLibera(&pFila);
+    if (linha == pLabirinto->saidaLinha &&
+        coluna == pLabirinto->saidaColuna) {
+      desalocarMatriz(pVisitados, pLabirinto->linhas);
+      filaLibera(&pFila);
       return pPercurso;
     }
 
@@ -111,8 +104,8 @@ Percurso *resolverPorBFS(Labirinto *pLabirinto) {
     }
   }
 
-  // desalocarMatriz(pVisitados, pLabirinto->linhas);
-  // filaLibera(&pFila);
+  desalocarMatriz(pVisitados, pLabirinto->linhas);
+  filaLibera(&pFila);
 
   return pPercurso;
 }
